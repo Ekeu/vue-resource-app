@@ -1,21 +1,29 @@
 <template>
   <base-card>
-    <base-button @click="setSectedTab('stored-resources')" :mode="storedResourceButtonMode">Stored Resources</base-button>
-    <base-button @click="setSectedTab('add-resource')" :mode="addResourceButtonMode">Add Resource</base-button>
+    <base-button
+      @click="setSectedTab('stored-resources')"
+      :mode="storedResourceButtonMode"
+      >Stored Resources</base-button
+    >
+    <base-button
+      @click="setSectedTab('add-resource')"
+      :mode="addResourceButtonMode"
+      >Add Resource</base-button
+    >
   </base-card>
   <keep-alive>
-  <component :is="selectedTab"></component>
+    <component :is="selectedTab"></component>
   </keep-alive>
 </template>
 
 <script>
 import StoredResources from './StoredResources.vue';
-import AddResource from './AddResource.vue'
+import AddResource from './AddResource.vue';
 
 export default {
   components: {
     StoredResources,
-    AddResource
+    AddResource,
   },
   data() {
     return {
@@ -45,31 +53,38 @@ export default {
   provide() {
     return {
       resources: this.storedResources,
-      addResource: this.addResource
+      addResource: this.addResource,
+      removeResource: this.removeResource,
     };
   },
   computed: {
     storedResourceButtonMode() {
-      return this.selectedTab === 'stored-resources' ? null : 'flat'
+      return this.selectedTab === 'stored-resources' ? null : 'flat';
     },
     addResourceButtonMode() {
-      return this.selectedTab === 'add-resource' ? null : 'flat'
-    }
+      return this.selectedTab === 'add-resource' ? null : 'flat';
+    },
   },
   methods: {
     setSectedTab(tab) {
-        this.selectedTab = tab;
+      this.selectedTab = tab;
     },
     addResource(title, description, url) {
       const newResource = {
         id: new Date().toISOString(),
         title: title,
         description: description,
-        link: url
+        link: url,
       };
       this.storedResources.unshift(newResource);
       this.selectedTab = 'stored-resources';
-    } 
-  }
+    },
+    removeResource(resourceId) {
+      const resultIndex = this.storedResources.findIndex(
+        (res) => res.id === resourceId
+      );
+      this.storedResources.splice(resultIndex, 1);
+    },
+  },
 };
 </script>
