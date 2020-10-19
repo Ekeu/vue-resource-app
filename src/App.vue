@@ -1,37 +1,16 @@
 <template>
   <the-header title="Resource App"></the-header>
+  <the-resources></the-resources>
 </template>
 
 <script>
 import TheHeader from './components/layouts/TheHeader.vue'
+import TheResources from './components/learning-resources/TheResources.vue'
 
 export default {
   components: {
     TheHeader,
-  },
-  data() {
-    return {
-      storedResources: [
-        {
-          id: 'official-vue-guide',
-          title: 'Official Vue Guide',
-          description: 'The official Vue.js documentation',
-          link: 'https://vuejs.org',
-        },
-        {
-          id: 'official-react-guide',
-          title: 'Official React Guide',
-          description: 'The official React.js documentation',
-          link: 'https://reactjs.org',
-        },
-        {
-          id: 'google',
-          title: 'Google',
-          description: 'Learn how to google...',
-          link: 'https://google.org',
-        },
-      ],
-    };
+    TheResources
   },
 };
 </script>
