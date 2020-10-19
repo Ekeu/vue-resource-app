@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h1>{{ title }}</h1>
+    <h1>{{ title }} &#x1F680;</h1>
   </header>
 </template>
 
